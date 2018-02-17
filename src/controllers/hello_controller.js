@@ -1,5 +1,18 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
+  static targets = ["name"]
 
+  connect() {
+    console.log("Hello, Stimulus!", this.element)
+  }
+
+  greet() {
+    // console.log("you clicked the greet button, with a data-action (so click is a event name, hello is the controller identifier and greet is the method to invoke", this.element)
+    console.log(`Hello, ${this.name}!`)
+  }
+
+  get name() {
+    return this.nameTarget.value
+  }
 }
