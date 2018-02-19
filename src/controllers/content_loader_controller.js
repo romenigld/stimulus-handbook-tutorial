@@ -9,11 +9,8 @@ export default class extends Controller {
     }
   }
 
-
-  startRefreshing() {
-    setInterval(() => {
-      this.load()
-    }, this.data.get("refreshInterval"))
+  disconnect() {
+    this.stopRefreshing()
   }
 
   load() {
@@ -22,5 +19,17 @@ export default class extends Controller {
       .then(html => {
         this.element.innerHTML = html
       })
+  }
+
+  startRefreshing() {
+    this.refreshTimer = setInterval(() => {
+      this.load()
+    }, this.data.get("refreshInterval"))
+  }
+
+  stopRefreshing() {
+    if (this.refreshTimer) {
+      clearInterval(this.refreshTimer)
+    }
   }
 }
